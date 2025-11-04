@@ -35,7 +35,7 @@
 إذا كان لديك Git، قم باستنساخ المستودع. وإلا، قم بتحميل الملفات إلى مجلد من اختيارك.
 
 ```bash
-git clone https://github.com/your-username/youtube-playlist-info.git
+git clone https://github.com/Mostafanaeam/youtube-playlist-info.git
 cd youtube-playlist-info
 ```
 
