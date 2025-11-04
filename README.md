@@ -96,3 +96,13 @@ npm install
 ## 📄 الترخيص
 
 هذا المشروع مرخص بموجب ترخيص MIT. انظر ملف `LICENSE` لمزيد من التفاصيل.
+
+## 👤 About Me
+
+I’m Mostafa Abd El-naeam, a MEAN Stack Developer & Tech Instructor focused on frontend excellence and backend mastery. I build real-world applications and help others do the same through structured training and mentorship.
+
+📧 Email: [Email](mailto:mnaeam10@gmail.com)
+
+🌐 GitHub: [GitHub](https://github.com/Mostafanaeam)
+
+   LinkedIn: [LinkedIn](https://www.linkedin.com/in/mostafanaeam)
