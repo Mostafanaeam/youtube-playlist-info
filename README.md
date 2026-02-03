@@ -1,108 +1,89 @@
-
-# أداة جلب بيانات قوائم تشغيل يوتيوب (YouTube Playlist Info Fetcher)
+# YouTube Playlist Info Fetcher
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 📜 نظرة عامة
+## 📜 Overview
 
-هذا المشروع عبارة عن سكربت بسيط وقوي مكتوب بلغة Node.js يستخدم واجهة برمجة تطبيقات بيانات يوتيوب (YouTube Data API v3) لجلب معلومات أساسية من أي قائمة تشغيل عامة على يوتيوب. يقوم السكربت باستخراج **عناوين جميع الفيديوهات** و**مدة كل فيديو** وعرضها في الطرفية (console).
+A simple and robust Node.js script that uses the YouTube Data API v3 to fetch essential information from any public YouTube playlist. It extracts the **video titles** and **duration** for every video in the list and outputs them to the console.
 
-## ✨ الميزات
+## ✨ Features
 
--**جلب العناوين والمدة:** يستخرج اسم الفيديو ومدته بدقة.
+- **Accurate Data**: Fetches precise titles and durations.
+- **Large Playlist Support**: Automatically handles playlists with more than 50 videos using token-based pagination.
+- **Simple Setup**: Minimal dependencies (only `googleapis`).
+- **Clean Output**: Displays a numbered list of videos with their details.
 
--**دعم القوائم الطويلة:** يتعامل تلقائيًا مع قوائم التشغيل التي تحتوي على أكثر من 50 فيديو باستخدام آلية تصفح الصفحات (Pagination).
+## 📋 Prerequisites
 
--**سهولة الاستخدام:** كل ما تحتاجه هو مفتاح API ورابط قائمة التشغيل.
+Before you begin, ensure you have the following installed:
 
--**مبني على Node.js:** يعمل في أي بيئة تدعم Node.js.
+- [Node.js](https://nodejs.org/) (v12 or higher)
+- NPM (included with Node.js)
+- A **Google Cloud Project** with the **YouTube Data API v3** enabled.
+- A valid **API Key**.
 
--**كود نظيف:** السكربت منظم وسهل القراءة والتعديل.
+## ⚙️ Installation
 
-## 📋 المتطلبات الأساسية
+1. **Clone the repository:**
 
-قبل البدء، تأكد من أن لديك الأدوات التالية مثبتة على نظامك:
+   ```bash
+   git clone https://github.com/Mostafanaeam/youtube-playlist-info.git
+   cd youtube-playlist-info
+   ```
 
--[Node.js](https://nodejs.org/) (الإصدار 12 أو أحدث)
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
--NPM (يأتي مثبتًا مع Node.js)
+## 🚀 Configuration & Usage
 
-## ⚙️ التثبيت والإعداد
+The project currently requires manual configuration in the source code.
 
-اتبع هذه الخطوات لإعداد المشروع وتشغيله على جهازك المحلي.
+### 1. Configure API Key
 
-**1. استنساخ المستودع (أو تحميل الملفات):**
-إذا كان لديك Git، قم باستنساخ المستودع. وإلا، قم بتحميل الملفات إلى مجلد من اختيارك.
+Open `getYoutubePlaylistInfo.js` and locate line 4:
 
-```bash
-git clone https://github.com/Mostafanaeam/youtube-playlist-info.git
-cd youtube-playlist-info
+```javascript
+const YOUTUBE_API_KEY = "ضع مفتاحك هنا"; // REPLACE with your actual API Key
 ```
 
-**2. تثبيت الاعتماديات:**
-قم بتشغيل الأمر التالي في الطرفية لتثبيت المكتبات المطلوبة (مكتبة `googleapis`):
+Replace the placeholder text with your generated Google API Key.
 
-```bash
-npm install
+### 2. Configure Playlist URL
+
+Open `getYoutubePlaylistInfo.js` and scroll to the bottom (line 107):
+
+```javascript
+const playlistUrl =
+  "https://www.youtube.com/playlist?list=PLDoPjvoNmBAw_t_oWSCw2d6XCgj6nS1i-";
 ```
 
-**3. الحصول على مفتاح YouTube Data API:**
--   اذهب إلى [Google Cloud Console](https://console.cloud.google.com/).
+Replace the URL with the link to the YouTube playlist you want to analyze.
 
--   أنشئ مشروعًا جديدًا.
+### 3. Run the Script
 
--   من قسم "APIs & Services"، اذهب إلى "Library" وابحث عن **"YouTube Data API v3"** وقم بتفعيله (Enable).
+Execute the script using Node.js:
 
--   اذهب إلى "Credentials" واضغط على "Create Credentials" ثم اختر "API key".
+```bash
+node getYoutubePlaylistInfo.js
+```
 
--   انسخ مفتاح الـ API الذي تم إنشاؤه.
+### Output Example
 
-**4. إعداد السكربت:**
--   افتح ملف `getYoutubePlaylistInfo.js`.
--   ابحث عن السطر التالي:
-    ```javascript
-    const YOUTUBE_API_KEY = 'ضع مفتاحك هنا';
-    ```
--   استبدل `'ضع مفتاحك هنا'` بمفتاح الـ API الذي حصلت عليه.
+The script will output the data in the console (note: default logging text is in Arabic):
 
-## 🚀 طريقة الاستخدام
+```text
+بيانات الفيديوهات في قائمة التشغيل:
+1. اسم الفيديو: Video Title 1 | مدة الفيديو: 10:05
+2. اسم الفيديو: Video Title 2 | مدة الفيديو: 05:30
+...
+```
 
-1.  **تحديد قائمة التشغيل:**
-    في ملف `getYoutubePlaylistInfo.js`، ابحث عن السطر التالي وقم بوضع رابط قائمة التشغيل التي تريد تحليلها:
-    ```javascript
-    const playlistUrl = 'https://www.youtube.com/playlist?list=PLDoPjvoNmBAw_t_oWSCw2d6XCgj6nS1i-';
-    ```
+## 🤝 Contributing
 
-2.  **تشغيل السكربت:**
-    افتح الطرفية في مجلد المشروع وقم بتنفيذ الأمر التالي:
-    ```bash
-    node getYoutubePlaylistInfo.js
-    ```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-3.  **مشاهدة النتائج:**
-    سيعرض السكربت قائمة مرقمة تحتوي على اسم كل فيديو ومدته، مشابهة للمثال التالي:
-    ```
-    تم العثور على 152 فيديو في قائمة التشغيل:
-    1. اسم الفيديو: Learn Python in Arabic #001 - Introduction And What's Python | مدة الفيديو: 11:54
-    2. اسم الفيديو: Learn Python in Arabic #002 - What I Need To Learn ? | مدة الفيديو: 07:20
-    3. اسم الفيديو: Learn Python in Arabic #003 - Syntax And Your First App | مدة الفيديو: 09:18
-    ...
-    ```
+## 📄 License
 
-## 🤝 المساهمة
-
-نرحب دائمًا بالمساهمات! إذا كان لديك اقتراحات لتحسين هذا المشروع، فلا تتردد في فتح "Issue" لمناقشة ما تود تغييره، أو قم بعمل "Pull Request" مباشرة.
-
-## 📄 الترخيص
-
-هذا المشروع مرخص بموجب ترخيص MIT. انظر ملف `LICENSE` لمزيد من التفاصيل.
-
-## 👤 About Me
-
-I’m Mostafa Abd El-naeam, a MEAN Stack Developer & Tech Instructor focused on frontend excellence and backend mastery. I build real-world applications and help others do the same through structured training and mentorship.
-
-📧 Email: [Email](mailto:mnaeam10@gmail.com)
-
-🌐 GitHub: [GitHub](https://github.com/Mostafanaeam)
-
-   LinkedIn: [LinkedIn](https://www.linkedin.com/in/mostafanaeam)
+This project is licensed under the MIT License. See the `LICENSE` file for details.
